@@ -25,7 +25,7 @@ public class KafkaProviderConfig {
 	@Autowired
 	private KafkaProperties kafkaProperties;
 	
-	@Value("${tpd.topic-name")
+	@Value("${tpd.topic-name}")
 	private String topicName;
 	
 	@Bean

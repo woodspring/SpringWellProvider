@@ -19,7 +19,7 @@ public class MessageProduce {
 	private CountDownLatch latch;
 	
 	public MessageProduce(@Value("${tpd.topic-name}") final String topicName_,
-			@Value("${tpd.message-per-request}") final int messagePerRequest_) {
+			@Value("${tpd.messags-per-request}") final int messagePerRequest_) {
 		this.topicName = topicName_;
 		this.msgPerRequest = messagePerRequest_;		
 		

@@ -1,12 +1,10 @@
 spring:
   kafka:
-    admin:
       consumer:
         group-id: tpd-loggers
         auto-offset-reset: earliest
-        bootstrap-servers: 192.168.0.107:9092
+      bootstrap-servers: 192.168.0.107:9092
         
-  tpd:
+tpd:
     topic-name: kingslake
     messags-per-request: 10
-    
