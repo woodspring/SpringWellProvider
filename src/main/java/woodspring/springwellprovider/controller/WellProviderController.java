@@ -35,4 +35,12 @@ public class WellProviderController {
     	String retStr = stringMsgProducer.sendMessages(msgBody, msgNo);
         return retStr;
     }
+    
+    @GetMapping(value = "/stock/{stockNo}")
+    public String sendStockFeed(@PathVariable int stockNo) {
+    	//stringMsgProducer.init("KINGSLAKE");
+    	logger.info("sendStockFeed:{}", stockNo);
+    	String retStr = stringMsgProducer.sendMessages( msgNo);
+        return retStr;
+    }
 }
