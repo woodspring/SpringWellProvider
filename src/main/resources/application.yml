@@ -5,6 +5,6 @@ spring:
         auto-offset-reset: earliest
     bootstrap-servers: 192.168.0.107:9092      
 tpd:
-    topic-name: kingslake
+    topic-name: northyork
     message-per-request: 10
     

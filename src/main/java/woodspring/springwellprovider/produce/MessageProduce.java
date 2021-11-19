@@ -46,7 +46,7 @@ public class MessageProduce {
 			String msgSent = String.format("%s-->%d", message, msgInd);
 			logger.info("topicName:"+topicName+"   -------------------------theMsg:"+ msgSent);
 			this.kafkaTmp.send(this.topicName, msgSent );			
-			latch.await(5, TimeUnit.SECONDS);
+			latch.await(100, TimeUnit.MICROSECONDS );
 			strBuf.append("send message:"+ message +" on "+ msgInd);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
