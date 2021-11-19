@@ -8,16 +8,20 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.ser.std.StringSerializer;
+import org.springframework.kafka.support.serializer.JsonSerializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 
 @Configuration
+@EnableConfigurationProperties
+@ConfigurationProperties
 public class KafkaProviderConfig {
 	final static int PARTITIONS = 3;
 	final static short REPLICATION = 1;
@@ -25,7 +29,7 @@ public class KafkaProviderConfig {
 	@Autowired
 	private KafkaProperties kafkaProperties;
 	
-	@Value("${tpd.topic-name")
+	@Value("${tpd.topic-name}")
 	private String topicName;
 	
 	@Bean
