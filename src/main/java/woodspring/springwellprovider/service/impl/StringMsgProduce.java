@@ -1,5 +1,6 @@
 package woodspring.springwellprovider.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -10,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import woodspring.springwellprovider.entity.StockFeed;
 import woodspring.springwellprovider.produce.MessageProduce;
+import woodspring.springwellprovider.service.FeedService;
 import woodspring.springwellprovider.service.ProduceService;
 
 
@@ -20,6 +23,9 @@ public class StringMsgProduce implements ProduceService<String> {
 	
 	@Autowired
 	MessageProduce msgProducer;
+	
+	@Autowired 
+	FeedService stockFeed;
 
 	@Override
 	public java.lang.String sendMessage(String message) {
@@ -54,6 +60,21 @@ public class StringMsgProduce implements ProduceService<String> {
 						.map( msg -> msgProducer.sendMsg(msg) )
 						.collect(Collectors.joining(", ", "{", "}"));
 		return retStr;
+	}
+	
+	@Override
+	public String sendStockFeed(int stockNo) {
+		List<StockFeed> retFeeds = new ArrayList<>();
+		//List<StockFeed> retFeeds = 
+				IntStream.generate( () -> ThreadLocalRandom.current().nextInt(StockFeedBuild.StockNumber))
+										.limit(stockNo)
+										.mapToObj( item -> stockFeed.generateStock( item))
+
+										.forEach( stock -> retFeeds.add( msgProducer.sendFeed(stock)));
+				StringBuffer strBuf = new StringBuffer();
+				for ( StockFeed item : retFeeds) strBuf.append( item.toString()+ "||");
+		//String retStr = retFeeds.stream().collect(Collectors.joining(", ", "{", "}"));
+		return strBuf.toString();
 	}
 
 	@Override

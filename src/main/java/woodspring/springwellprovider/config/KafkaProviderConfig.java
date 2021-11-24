@@ -17,6 +17,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
 import org.springframework.kafka.support.serializer.JsonSerializer;
+
+import woodspring.springwellprovider.entity.StockFeed;
+
 import org.apache.kafka.common.serialization.StringSerializer;
 
 @Configuration
@@ -31,6 +34,9 @@ public class KafkaProviderConfig {
 	
 	@Value("${tpd.topic-name}")
 	private String topicName;
+	
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String bootstrapServers;
 	
 	@Bean
 	public Map<String, Object> producerConfigs() {
@@ -56,6 +62,19 @@ public class KafkaProviderConfig {
 		
 	}
 	
+	@Bean
+    public ProducerFactory<String, StockFeed> stockFeedProducerFactory() {
+        Map<String, Object> configProps = new HashMap<>();
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class.getName());
+        return new DefaultKafkaProducerFactory<>(configProps);
+    }
+
+    @Bean
+    public KafkaTemplate<String, StockFeed> stockFeedKafkaTemplate() {
+        return new KafkaTemplate<>(stockFeedProducerFactory());
+    }
 	
 	
 	

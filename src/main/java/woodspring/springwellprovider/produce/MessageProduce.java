@@ -12,6 +12,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import woodspring.springwellprovider.config.KafkaProviderConfig;
+import woodspring.springwellprovider.entity.StockFeed;
 
 
 @Component
@@ -70,6 +71,24 @@ public class MessageProduce {
 			strBuf.append("InterruptedException,  on "+ msgInd +"  "+ message);
 		}
 		return strBuf.toString();		
+	}
+	
+	public StockFeed sendFeed(StockFeed stockFeed) {
+		latch = new CountDownLatch( msgPerRequest);
+		//StringBuffer strBuf = new StringBuffer();
+		try {	
+			this.kafkaTmp.send(this.topicName,stockFeed );			
+			latch.await(6000, TimeUnit.MILLISECONDS);
+			//strBuf.append(String.format("send stockFeed:[%s] - [%d]\n", stockFeed.toString(), stockFeed.getId()) );
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.info("InterruptedException,  on "+ stockFeed.getId());
+			//strBuf.append("InterruptedException,  on "+ stockFeed.getId());
+		}
+		//return strBuf.toString();
+		logger.info("Send out:[{}]", stockFeed.toString());
+		return stockFeed;
 	}
 
 }

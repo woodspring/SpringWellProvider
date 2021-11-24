@@ -17,13 +17,14 @@ public class StockFeedBuild implements FeedService{
 			List<String> symbolList;
 			List<Double> priceList;
 			List<String> sideList;
+	
+	public static int StockNumber;
 			
-			
-	private StockFeedBuild() {
+	public StockFeedBuild() {
 		symbolList = Arrays.asList("IBM", "AAPL", "DAL", "C","A", "B", "XYF", "TTC", "OCC", "Z");
 		priceList = Arrays.asList( 116.66, 157.87, 40.12, 76.11, 162.16, 45.43, 4.6900, 104.85, 4.1200, 57.09 );
 		sideList = Arrays.asList("BUY", "SELL");
-		
+		StockNumber = symbolList.size();
 	}
 	
 

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 
 public class StockFeed {
+
 	Long id;
 	String symbol;
 	Double price;
@@ -47,6 +48,11 @@ public class StockFeed {
 	}
 	public void setAtTime(Long atTime) {
 		this.atTime = atTime;
+	}
+	@Override
+	public String toString() {
+		return "StockFeed [id=" + id + ", symbol=" + symbol + ", price=" + price + ", side=" + side + ", atTime="
+				+ atTime + "]";
 	}
 
 

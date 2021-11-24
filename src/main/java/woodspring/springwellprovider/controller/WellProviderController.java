@@ -40,7 +40,7 @@ public class WellProviderController {
     public String sendStockFeed(@PathVariable int stockNo) {
     	//stringMsgProducer.init("KINGSLAKE");
     	logger.info("sendStockFeed:{}", stockNo);
-    	String retStr = stringMsgProducer.sendMessages( msgNo);
+    	String retStr = stringMsgProducer.sendStockFeed( stockNo);
         return retStr;
     }
 }
