@@ -78,7 +78,7 @@ public class MessageProduce {
 		//StringBuffer strBuf = new StringBuffer();
 		try {	
 			this.kafkaTmp.send(this.topicName,stockFeed );			
-			latch.await(6000, TimeUnit.MILLISECONDS);
+			latch.await(1000, TimeUnit.MILLISECONDS);
 			//strBuf.append(String.format("send stockFeed:[%s] - [%d]\n", stockFeed.toString(), stockFeed.getId()) );
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

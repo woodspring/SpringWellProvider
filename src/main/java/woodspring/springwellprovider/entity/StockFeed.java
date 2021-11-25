@@ -54,6 +54,4 @@ public class StockFeed {
 		return "StockFeed [id=" + id + ", symbol=" + symbol + ", price=" + price + ", side=" + side + ", atTime="
 				+ atTime + "]";
 	}
-
-
 }

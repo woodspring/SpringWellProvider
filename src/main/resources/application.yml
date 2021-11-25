@@ -5,6 +5,8 @@ spring:
         auto-offset-reset: earliest
     bootstrap-servers: 192.168.0.107:9092      
 tpd:
-    topic-name: springView6000000
+    topic-name: springView
     message-per-request: 10
+server:  
+      port: 9090    
     
